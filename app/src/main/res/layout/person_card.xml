@@ -2,24 +2,18 @@
 
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="6dp"
-    app:cardCornerRadius="3dp"
-    app:cardElevation="6dp">
+    app:cardCornerRadius="5dp"
+    app:cardElevation="10dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="8dp">
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingRight="10dp"
-            android:src= "@drawable/ricky_dali"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -30,33 +24,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
-                android:text="Name: Ricky"
+                tools:text="Name: Ricky"
                 />
             <TextView
                 android:id="@+id/message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Message: Let's build something"/>
+                tools:text="Message: Let's build something"/>
             <TextView
                 android:id="@+id/hometown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Hometown: Havana, Cuba"/>
+                tools:text="Hometown: Havana, Cuba"/>
             <TextView
                 android:id="@+id/terms_on"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Terms on: 17S"/>
+                tools:text="Terms on: 17S"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Project: None for now"/>
+                tools:text="Project: None for now"/>
 
         </LinearLayout>
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="10dp"
+            android:src= "@drawable/ricky_dali"/>
     </LinearLayout>
 
 
