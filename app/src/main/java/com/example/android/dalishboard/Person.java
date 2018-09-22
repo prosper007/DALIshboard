@@ -1,24 +1,24 @@
 package com.example.android.dalishboard;
 
-import android.location.Location;
+import android.graphics.Bitmap;
+import android.location.Address;
 
 public class Person {
     private String mName;
-    private String mIconUrl;
+    private Bitmap mIcon;
     private String mUrl;
     private String mMessage;
-    private double mLatitude, mLongitude;
+    private String mAddress;
     private String mTermsOn;
     private String mProject;
 
-    public Person(String mName, String mIconUrl, String mUrl, String mMessage, double mLatitude,
-                  double mLongitude, String mTermsOn, String mProject) {
+    public Person(String mName, Bitmap mIcon, String mUrl, String mMessage, String mAddress,
+                  String mTermsOn, String mProject) {
         this.mName = mName;
-        this.mIconUrl = mIconUrl;
+        this.mIcon = mIcon;
         this.mUrl = mUrl;
         this.mMessage = mMessage;
-        this.mLatitude = mLatitude;
-        this.mLongitude = mLongitude;
+        this.mAddress = mAddress;
         this.mTermsOn = mTermsOn;
         this.mProject = mProject;
     }
@@ -27,8 +27,8 @@ public class Person {
         return mName;
     }
 
-    public String getmIconUrl() {
-        return mIconUrl;
+    public Bitmap getmIcon() {
+        return mIcon;
     }
 
     public String getmUrl() {
@@ -39,12 +39,8 @@ public class Person {
         return mMessage;
     }
 
-    public double getmLatitude() {
-        return mLatitude;
-    }
-
-    public double getmLongitude() {
-        return mLongitude;
+    public String getmAddress() {
+        return mAddress;
     }
 
     public String getmTermsOn() {
@@ -59,11 +55,10 @@ public class Person {
     public String toString() {
         return "Person{" +
                 "mName='" + mName + '\'' +
-                ", mIconUrl='" + mIconUrl + '\'' +
+                ", mIcon='" + mIcon + '\'' +
                 ", mUrl='" + mUrl + '\'' +
                 ", mMessage='" + mMessage + '\'' +
-                ", mLatitude=" + mLatitude +
-                ", mLongitude=" + mLongitude +
+                ", mAddress='" + mAddress + '\'' +
                 ", mTermsOn='" + mTermsOn + '\'' +
                 ", mProject='" + mProject + '\'' +
                 '}';
