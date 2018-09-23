@@ -5,26 +5,33 @@ import android.location.Address;
 
 public class Person {
     private String mName;
+    private String mIconUrl;
     private Bitmap mIcon;
     private String mUrl;
     private String mMessage;
+    private double mLatitude, mLongitude;
     private String mAddress;
     private String mTermsOn;
     private String mProject;
 
-    public Person(String mName, Bitmap mIcon, String mUrl, String mMessage, String mAddress,
-                  String mTermsOn, String mProject) {
+    public Person(String mName, String mIconUrl, String mUrl, String mMessage,
+                  double mLatitude, double mLongitude, String mTermsOn, String mProject) {
         this.mName = mName;
-        this.mIcon = mIcon;
+        this.mIconUrl = mIconUrl;
         this.mUrl = mUrl;
         this.mMessage = mMessage;
-        this.mAddress = mAddress;
+        this.mLatitude = mLatitude;
+        this.mLongitude = mLongitude;
         this.mTermsOn = mTermsOn;
         this.mProject = mProject;
     }
 
     public String getmName() {
         return mName;
+    }
+
+    public String getmIconUrl() {
+        return mIconUrl;
     }
 
     public Bitmap getmIcon() {
@@ -39,6 +46,14 @@ public class Person {
         return mMessage;
     }
 
+    public double getmLatitude() {
+        return mLatitude;
+    }
+
+    public double getmLongitude() {
+        return mLongitude;
+    }
+
     public String getmAddress() {
         return mAddress;
     }
@@ -49,6 +64,14 @@ public class Person {
 
     public String getmProject() {
         return mProject;
+    }
+
+    public void setmIcon(Bitmap mIcon) {
+        this.mIcon = mIcon;
+    }
+
+    public void setmAddress(String mAddress) {
+        this.mAddress = mAddress;
     }
 
     @Override
