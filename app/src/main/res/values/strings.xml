@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">DALIshboard</string>
     <string name="url_prefix">http://mappy.dali.dartmouth.edu/</string>
+    <string name="none_for_now">None for now</string>
 </resources>

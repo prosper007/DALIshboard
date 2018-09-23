@@ -1,5 +1,6 @@
 package com.example.android.dalishboard;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -19,11 +20,12 @@ import java.util.ArrayList;
 
 public class JSONParser {
     private static final String LOG_TAG = JSONParser.class.getSimpleName();
+    Context context;
 
     private JSONParser(){
     }
 
-    public static ArrayList<Person> fetchPersonsData(String requestUrl){
+    public static ArrayList<Person> fetchPersonsData(String requestUrl, Context context){
         URL url = createURL(requestUrl);
         String jsonResponse = null;
         try {
@@ -31,7 +33,7 @@ public class JSONParser {
         } catch (IOException e){
             Log.e(LOG_TAG, "Couldn't close input stream bro", e);
         }
-        return extractPersons(jsonResponse);
+        return extractPersons(jsonResponse, context);
     }
 
     private static URL createURL(String stringUrl){
@@ -95,7 +97,7 @@ public class JSONParser {
         return jsonResponse;
     }
 
-    private static ArrayList<Person> extractPersons(String jsonResponse){
+    private static ArrayList<Person> extractPersons(String jsonResponse, Context context){
         if (TextUtils.isEmpty(jsonResponse)){
             return null;
         }
@@ -103,22 +105,32 @@ public class JSONParser {
         ArrayList<Person> persons = new ArrayList<>();
 
         try {
-
             JSONArray root = new JSONArray(jsonResponse);
             for(int i = 0; i < root.length(); i++){
                 JSONObject currentPerson = root.getJSONObject(i);
                 String name = currentPerson.getString("name");
-                String iconUrl = R.string.url_prefix + currentPerson.getString("iconUrl");
+                String iconUrl = context.getString(R.string.url_prefix) + currentPerson.getString("iconUrl");
                 String url = currentPerson.getString("url");
                 String message = currentPerson.getString("message");
                 double latitude = currentPerson.getJSONArray("lat_long").getDouble(0);
                 double longitude = currentPerson.getJSONArray("lat_long").getDouble(1);
                 String termsOn = currentPerson.getJSONArray("terms_on").getString(0);
-                String project = currentPerson.getJSONArray("project").getString(0);
+                JSONArray projectArray = currentPerson.getJSONArray("project");
+                String project;
+                if(projectArray.length() != 0){
+                    project = projectArray.getString(0);
+                }
+                else{
+
+                    project = context.getString(R.string.none_for_now);
+                }
+                Log.w("JSONParser", "I got here");
 
                 Person person = new Person(name, iconUrl, url, message, latitude, longitude,
                         termsOn, project);
                 persons.add(person);
+
+
             }
 
 

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHolder>{
@@ -29,12 +31,12 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
         }
 
         public void setDetails(Person person){
-            icon.setImageBitmap(person.getmIcon());
             name.setText(person.getmName());
             message.setText(person.getmMessage());
             hometown.setText(person.getmAddress());
             termsOn.setText(person.getmTermsOn());
             project.setText(person.getmProject());
+            Glide.with(itemView.getContext()).load(person.getmIconUrl()).into(icon);
         }
 
     }
