@@ -117,12 +117,12 @@ public class JSONParser {
                 String termsOn = currentPerson.getJSONArray("terms_on").getString(0);
                 JSONArray projectArray = currentPerson.getJSONArray("project");
                 String project;
-                if(projectArray.length() != 0){
-                    project = projectArray.getString(0);
+                if(projectArray.length() == 0 || projectArray.getString(0).equals("")){
+                    project = context.getString(R.string.none_for_now);
                 }
                 else{
+                    project = projectArray.getString(0);
 
-                    project = context.getString(R.string.none_for_now);
                 }
                 Log.w("JSONParser", "I got here");
 

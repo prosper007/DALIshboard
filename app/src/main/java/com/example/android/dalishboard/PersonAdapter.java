@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -36,7 +39,9 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
             hometown.setText(person.getmAddress());
             termsOn.setText(person.getmTermsOn());
             project.setText(person.getmProject());
-            Glide.with(itemView.getContext()).load(person.getmIconUrl()).into(icon);
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions = requestOptions.transform(new RoundedCorners(100));
+            Glide.with(itemView.getContext()).load(person.getmIconUrl()).apply(requestOptions).into(icon);
         }
 
     }

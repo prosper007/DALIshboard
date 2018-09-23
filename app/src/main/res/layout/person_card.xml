@@ -23,42 +23,42 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
+                android:textSize="16sp"
                 tools:text="Name: Ricky"
                 />
             <TextView
                 android:id="@+id/message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 tools:text="Message: Let's build something"/>
             <TextView
                 android:id="@+id/hometown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 tools:text="Hometown: Havana, Cuba"/>
             <TextView
                 android:id="@+id/terms_on"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 tools:text="Terms on: 17S"/>
             <TextView
                 android:id="@+id/project"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 tools:text="Project: None for now"/>
 
         </LinearLayout>
         <ImageView
             android:id="@+id/icon"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:paddingRight="10dp"
-            android:src= "@drawable/ricky_dali"/>
+            android:scaleType="fitCenter"
+            tools:src= "@drawable/ricky_dali"/>
     </LinearLayout>
 
 
