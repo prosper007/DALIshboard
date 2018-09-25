@@ -1,12 +1,26 @@
 package com.example.android.dalishboard;
 
-import android.graphics.Bitmap;
-import android.location.Address;
 
-public class Person {
+import android.location.Address;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Person implements Parcelable{
+
+
+    public static final Parcelable.Creator<Person> CREATOR
+            = new Parcelable.Creator() {
+        public Person createFromParcel(Parcel in) {
+            return new Person(in);
+        }
+
+        public Person[] newArray(int size) {
+            return new Person[size];
+        }
+    };
+
     private String mName;
     private String mIconUrl;
-    private Bitmap mIcon;
     private String mUrl;
     private String mMessage;
     private double mLatitude, mLongitude;
@@ -34,9 +48,6 @@ public class Person {
         return mIconUrl;
     }
 
-    public Bitmap getmIcon() {
-        return mIcon;
-    }
 
     public String getmUrl() {
         return mUrl;
@@ -66,9 +77,6 @@ public class Person {
         return mProject;
     }
 
-    public void setmIcon(Bitmap mIcon) {
-        this.mIcon = mIcon;
-    }
 
     public void setmAddress(String mAddress) {
         this.mAddress = mAddress;
@@ -78,12 +86,39 @@ public class Person {
     public String toString() {
         return "Person{" +
                 "mName='" + mName + '\'' +
-                ", mIcon='" + mIcon + '\'' +
                 ", mUrl='" + mUrl + '\'' +
                 ", mMessage='" + mMessage + '\'' +
                 ", mAddress='" + mAddress + '\'' +
                 ", mTermsOn='" + mTermsOn + '\'' +
                 ", mProject='" + mProject + '\'' +
                 '}';
+    }
+
+    public Person(Parcel in){
+        this.mName = in.readString();
+        this.mIconUrl = in.readString();
+        this.mUrl = in.readString();
+        this.mMessage = in.readString();
+        this.mLatitude = in.readDouble();
+        this.mLongitude = in.readDouble();
+        this.mTermsOn = in.readString();
+        this.mProject = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(this.mName);
+        parcel.writeString(this.mIconUrl);
+        parcel.writeString(this.mUrl);
+        parcel.writeString(this.mMessage);
+        parcel.writeDouble(this.mLatitude);
+        parcel.writeDouble(this.mLongitude);
+        parcel.writeString(this.mTermsOn);
+        parcel.writeString(this.mProject);
     }
 }

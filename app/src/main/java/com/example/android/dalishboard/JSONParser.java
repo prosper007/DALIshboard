@@ -124,7 +124,6 @@ public class JSONParser {
                     project = projectArray.getString(0);
 
                 }
-                Log.w("JSONParser", "I got here");
 
                 Person person = new Person(name, iconUrl, url, message, latitude, longitude,
                         termsOn, project);
@@ -141,5 +140,7 @@ public class JSONParser {
         return persons;
 
     }
+
+
 
 }
