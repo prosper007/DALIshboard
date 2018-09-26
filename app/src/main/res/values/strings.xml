@@ -1,5 +1,48 @@
 <resources>
     <string name="app_name">DALIshboard</string>
     <string name="url_prefix">http://mappy.dali.dartmouth.edu/</string>
-    <string name="none_for_now">None for now</string>
+
+    <string name="name">
+        <![CDATA[
+        <b>Name: </b>
+        ]]>
+    </string>
+
+    <string name="message">
+        <![CDATA[
+        <b>Message: </b>
+        ]]>
+    </string>
+
+    <string name="terms_on">
+        <![CDATA[
+        <b>Terms On: </b>
+        ]]>
+    </string>
+
+    <string name="projects">
+        <![CDATA[
+        <b>Projects: </b>
+        ]]>
+    </string>
+
+    <string name="address">
+        <![CDATA[
+        <b>Address: </b>
+        ]]>
+    </string>
+
+
+    <string name="none_for_now">
+        <![CDATA[
+        None for now
+        ]]>
+    </string>
+
+    <string name="unavailable">
+        <![CDATA[
+        Unavailable
+        ]]>
+    </string>
+
 </resources>

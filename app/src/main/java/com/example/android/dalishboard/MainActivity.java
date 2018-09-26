@@ -87,9 +87,23 @@ private AddressResultReceiver mResultReceiver;
                     if (resultData == null) {
                         return;
                     }
+                    final Bundle result = resultData;
 
-                    personAdapter.refreshPersons(resultData.<Person>getParcelableArrayList(Constants.RESULT_DATA_KEY));
-                    Log.i(LOG_TAG, personArrayList.toString());
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Log.i("Before: ", personArrayList.toString());
+                            //personArrayList.clear();
+                            //personArrayList.addAll(result.<Person>getParcelableArrayList(Constants.RESULT_DATA_KEY));
+                            personAdapter.refreshPersons(result.<Person>getParcelableArrayList(Constants.RESULT_DATA_KEY));
+                            Log.i("After: ", personArrayList.toString());
+                            //personAdapter.notifyDataSetChanged();
+                        }
+                    });
+
+                    //Log.i("Testing Addy: ", result.getParcelableArrayList(Constants.RESULT_DATA_KEY).toString());
                 }
         }
 }

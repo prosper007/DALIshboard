@@ -108,20 +108,20 @@ public class JSONParser {
             JSONArray root = new JSONArray(jsonResponse);
             for(int i = 0; i < root.length(); i++){
                 JSONObject currentPerson = root.getJSONObject(i);
-                String name = currentPerson.getString("name");
+                String name = context.getString(R.string.name) + currentPerson.getString("name");
                 String iconUrl = context.getString(R.string.url_prefix) + currentPerson.getString("iconUrl");
                 String url = currentPerson.getString("url");
-                String message = currentPerson.getString("message");
+                String message = context.getString(R.string.message) + currentPerson.getString("message");
                 double latitude = currentPerson.getJSONArray("lat_long").getDouble(0);
                 double longitude = currentPerson.getJSONArray("lat_long").getDouble(1);
-                String termsOn = currentPerson.getJSONArray("terms_on").getString(0);
+                String termsOn = context.getString(R.string.terms_on) + currentPerson.getJSONArray("terms_on").getString(0);
                 JSONArray projectArray = currentPerson.getJSONArray("project");
                 String project;
                 if(projectArray.length() == 0 || projectArray.getString(0).equals("")){
-                    project = context.getString(R.string.none_for_now);
+                    project = context.getString(R.string.projects) + context.getString(R.string.none_for_now);
                 }
                 else{
-                    project = projectArray.getString(0);
+                    project = context.getString(R.string.projects) + projectArray.getString(0);
 
                 }
 

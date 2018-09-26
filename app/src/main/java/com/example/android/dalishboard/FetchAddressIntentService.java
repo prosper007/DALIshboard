@@ -40,7 +40,7 @@ public class FetchAddressIntentService extends IntentService {
         mReceiver = intent.getParcelableExtra(Constants.RECEIVER);
         Address address;
         List<Address> addresses = null;
-        String addressAsString = "";
+        StringBuilder addressAsString = new StringBuilder();
         Location location = new Location("");
         for(Person person : people) {
             location.setLatitude(person.getmLatitude());
@@ -65,24 +65,47 @@ public class FetchAddressIntentService extends IntentService {
                     errorMessage = person.getmName() + "No address found";
                     Log.e(TAG, errorMessage);
                 }
+                addressAsString.append(getString(R.string.address)).append(getString(R.string.unavailable));
+                person.setmAddress(addressAsString.toString());
+
                 //deliverResultToReceiver(Constants.FAILURE_RESULT, errorMessage);
             }else{
                 address = addresses.get(0);
-                for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
-                    addressAsString = address.getAddressLine(i) + ", ";
+                addressAsString.append(getString(R.string.address));
+                String locality, adminArea, countryName;
+                if(address.getLocality() != null){
+                    locality = address.getLocality() + ", ";
                 }
-                person.setmAddress(addressAsString);
-                //Log.i(TAG, "Address found: " + addressAsString);
+                else{
+                    locality = "";
+                }
+                if(address.getAdminArea() != null){
+                    adminArea = address.getAdminArea() + ", ";
+                }
+                else{
+                    adminArea = "";
+                }
+                if(address.getCountryName() != null){
+                    countryName = address.getCountryName();
+                }
+                else{
+                    countryName = "";
+                }
+
+                addressAsString.append(locality).append(adminArea).append(countryName);
+                person.setmAddress(addressAsString.toString());
             }
+            addressAsString.delete(0, addressAsString.length());
         }
         deliverResultToReceiver(Constants.SUCCESS_RESULT, people);
-
+        //Log.i("Testing addy", people.toString());
     }
 
     private void deliverResultToReceiver(int resultCode, ArrayList<Person> people) {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(Constants.RESULT_DATA_KEY, people);
         mReceiver.send(resultCode, bundle);
+
     }
 
     private void deliverResultToReceiver(int resultCode, String message) {

@@ -103,6 +103,7 @@ public class Person implements Parcelable{
         this.mLongitude = in.readDouble();
         this.mTermsOn = in.readString();
         this.mProject = in.readString();
+        this.mAddress = in.readString();
     }
 
     @Override
@@ -120,5 +121,6 @@ public class Person implements Parcelable{
         parcel.writeDouble(this.mLongitude);
         parcel.writeString(this.mTermsOn);
         parcel.writeString(this.mProject);
+        parcel.writeString(this.mAddress);
     }
 }

@@ -3,6 +3,8 @@ package com.example.android.dalishboard;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,13 +36,16 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
         }
 
         public void setDetails(Person person){
-            name.setText(person.getmName());
-            message.setText(person.getmMessage());
-            hometown.setText(person.getmAddress());
-            termsOn.setText(person.getmTermsOn());
-            project.setText(person.getmProject());
+            name.setText(Html.fromHtml(person.getmName()));
+            message.setText(Html.fromHtml(person.getmMessage()));
+            if(person.getmAddress() != null) {
+                hometown.setText(Html.fromHtml(person.getmAddress()));
+                Log.e(LOG_TAG, person.getmAddress());
+            }
+            termsOn.setText(Html.fromHtml(person.getmTermsOn()));
+            project.setText(Html.fromHtml(person.getmProject()));
             RequestOptions requestOptions = new RequestOptions();
-            //requestOptions = requestOptions.transform(new CenterCrop());
+
             requestOptions = requestOptions.transform(new RoundedCorners(50));
             Glide.with(itemView.getContext()).load(person.getmIconUrl()).apply(requestOptions).into(icon);
         }
@@ -73,9 +78,9 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
     }
 
     public void refreshPersons(List<Person> people){
-        mPersons.clear();
-        mPersons.addAll(people);
-        notifyDataSetChanged();
+        this.mPersons.clear();
+        this.mPersons.addAll(people);
+        this.notifyDataSetChanged();
     }
 }
 
