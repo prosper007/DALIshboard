@@ -45,4 +45,7 @@
         ]]>
     </string>
 
+    <string name="no_internet">No internet connection :(</string>
+    <string name="lost_connection">You\'ve lost internet connection :(</string>
+
 </resources>

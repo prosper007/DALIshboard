@@ -8,4 +8,19 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
+    <style name="MyCustomTheme" parent="Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/MyActionBarTheme</item>
+        <item name="colorPrimary">#f0f0f0</item>
+        <item name="colorPrimaryDark">#dedede</item>
+        <item name="colorAccent">#f5f5f5</item>
+    </style>
+
+    <style name="MyActionBarTheme" parent="Theme.AppCompat.Light">
+        <item name="android:background">@android:color/holo_blue_dark</item>
+    </style>
+
 </resources>

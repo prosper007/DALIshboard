@@ -8,7 +8,6 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.IOException;
@@ -51,7 +50,7 @@ public class FetchAddressIntentService extends IntentService {
                         location.getLongitude(), 1);
             } catch (IOException ioException) {
                 errorMessage = "Service not available";
-                Log.e(TAG, errorMessage, ioException);
+                //Log.e(TAG, errorMessage, ioException);
             } catch (IllegalArgumentException illegalArgumentException) {
                 errorMessage = "invalid latitude and longitude used";
                 Log.e(TAG, errorMessage + ". " + "Name: " + person.getmName() +
@@ -68,7 +67,7 @@ public class FetchAddressIntentService extends IntentService {
                 addressAsString.append(getString(R.string.address)).append(getString(R.string.unavailable));
                 person.setmAddress(addressAsString.toString());
 
-                //deliverResultToReceiver(Constants.FAILURE_RESULT, errorMessage);
+
             }else{
                 address = addresses.get(0);
                 addressAsString.append(getString(R.string.address));
@@ -98,7 +97,7 @@ public class FetchAddressIntentService extends IntentService {
             addressAsString.delete(0, addressAsString.length());
         }
         deliverResultToReceiver(Constants.SUCCESS_RESULT, people);
-        //Log.i("Testing addy", people.toString());
+
     }
 
     private void deliverResultToReceiver(int resultCode, ArrayList<Person> people) {
@@ -106,12 +105,6 @@ public class FetchAddressIntentService extends IntentService {
         bundle.putParcelableArrayList(Constants.RESULT_DATA_KEY, people);
         mReceiver.send(resultCode, bundle);
 
-    }
-
-    private void deliverResultToReceiver(int resultCode, String message) {
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.RESULT_DATA_KEY, message);
-        mReceiver.send(resultCode, bundle);
     }
 
 

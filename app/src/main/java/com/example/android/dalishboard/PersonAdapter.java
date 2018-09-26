@@ -1,6 +1,8 @@
 package com.example.android.dalishboard;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -35,12 +37,11 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
             project = itemView.findViewById(R.id.project);
         }
 
-        public void setDetails(Person person){
+        public void setDetails(final Person person){
             name.setText(Html.fromHtml(person.getmName()));
             message.setText(Html.fromHtml(person.getmMessage()));
             if(person.getmAddress() != null) {
                 hometown.setText(Html.fromHtml(person.getmAddress()));
-                Log.e(LOG_TAG, person.getmAddress());
             }
             termsOn.setText(Html.fromHtml(person.getmTermsOn()));
             project.setText(Html.fromHtml(person.getmProject()));
