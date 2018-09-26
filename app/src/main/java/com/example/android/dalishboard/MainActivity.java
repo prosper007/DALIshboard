@@ -3,6 +3,7 @@ package com.example.android.dalishboard;
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
+import android.nfc.Tag;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
@@ -87,8 +88,8 @@ private AddressResultReceiver mResultReceiver;
                         return;
                     }
 
-                    personArrayList = resultData.getParcelableArrayList(Constants.RESULT_DATA_KEY);
-                    personAdapter.notifyDataSetChanged();
+                    personAdapter.refreshPersons(resultData.<Person>getParcelableArrayList(Constants.RESULT_DATA_KEY));
+                    Log.i(LOG_TAG, personArrayList.toString());
                 }
         }
 }

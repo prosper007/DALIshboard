@@ -62,7 +62,7 @@ public class FetchAddressIntentService extends IntentService {
 
             if (addresses == null || addresses.size() == 0) {
                 if (errorMessage.isEmpty()) {
-                    errorMessage = "No address found";
+                    errorMessage = person.getmName() + "No address found";
                     Log.e(TAG, errorMessage);
                 }
                 //deliverResultToReceiver(Constants.FAILURE_RESULT, errorMessage);
@@ -72,7 +72,7 @@ public class FetchAddressIntentService extends IntentService {
                     addressAsString = address.getAddressLine(i) + ", ";
                 }
                 person.setmAddress(addressAsString);
-                Log.i(TAG, "Address found");
+                //Log.i(TAG, "Address found: " + addressAsString);
             }
         }
         deliverResultToReceiver(Constants.SUCCESS_RESULT, people);

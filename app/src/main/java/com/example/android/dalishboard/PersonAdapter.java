@@ -40,7 +40,8 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
             termsOn.setText(person.getmTermsOn());
             project.setText(person.getmProject());
             RequestOptions requestOptions = new RequestOptions();
-            requestOptions = requestOptions.transform(new RoundedCorners(100));
+            //requestOptions = requestOptions.transform(new CenterCrop());
+            requestOptions = requestOptions.transform(new RoundedCorners(50));
             Glide.with(itemView.getContext()).load(person.getmIconUrl()).apply(requestOptions).into(icon);
         }
 
@@ -69,6 +70,12 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
     @Override
     public int getItemCount() {
         return mPersons.size();
+    }
+
+    public void refreshPersons(List<Person> people){
+        mPersons.clear();
+        mPersons.addAll(people);
+        notifyDataSetChanged();
     }
 }
 
