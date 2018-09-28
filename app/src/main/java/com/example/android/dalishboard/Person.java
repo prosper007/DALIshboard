@@ -86,7 +86,6 @@ public class Person implements Parcelable{
     public String toString() {
         return "Person{" +
                 "mName='" + mName + '\'' +
-                ", mUrl='" + mUrl + '\'' +
                 ", mMessage='" + mMessage + '\'' +
                 ", mAddress='" + mAddress + '\'' +
                 ", mTermsOn='" + mTermsOn + '\'' +
