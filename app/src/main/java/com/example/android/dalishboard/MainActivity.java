@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     NetworkReceiver mReceiver;
     Snackbar mNoConnectionSnackBar;
     String mQuery;
+    TextView emptyView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,11 +75,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 
         mProgressBar = findViewById(R.id.progress);
+        emptyView = findViewById(R.id.empty);
+        emptyView.setText(R.string.no_result);
+        emptyView.setVisibility(View.GONE);
 
 
         loadLoader();
-        doMySearch(mQuery);
-
     }
 
     @Override
@@ -98,7 +101,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
         Log.i("results: ", results.toString());
         PersonAdapter resultAdapter = new PersonAdapter(this, results);
-        recyclerView.setAdapter(resultAdapter);
+        if(results.size() == 0){
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            recyclerView.setAdapter(resultAdapter);
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -107,11 +118,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         unregisterReceiver(mReceiver);
     }
 
-    @Override
-    public void onBackPressed() {
-        recyclerView.setAdapter(personAdapter);
-        //super.onBackPressed();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -137,6 +143,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public boolean onMenuItemActionCollapse(MenuItem menuItem) {
                 recyclerView.setAdapter(personAdapter);
+                if(recyclerView.getVisibility() == View.GONE){
+                    recyclerView.setVisibility(View.VISIBLE);
+                }
+                if(emptyView.getVisibility() == View.VISIBLE){
+                    emptyView.setVisibility(View.GONE);
+                }
                 return true;
             }
         });
