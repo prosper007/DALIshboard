@@ -50,5 +50,6 @@
     <string name="search_hint">Search DALIshboard</string>
     <string name="search_title">Search</string>
     <string name="no_result">No result for query</string>
+    <string name="processing">Processing(…, &#8230;)</string>
 
 </resources>

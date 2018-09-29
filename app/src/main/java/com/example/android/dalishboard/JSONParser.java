@@ -144,6 +144,9 @@ public class JSONParser {
                 //create Person object with extracted data
                 Person person = new Person(name, iconUrl, url, message, latitude, longitude,
                         termsOn, project);
+                //set Address to "Processing..." while intent service processes coordinates
+                person.setmAddress(context.getString(R.string.address ) +
+                        context.getString(R.string.processing));
 
                 //add person object to arraylist of Person
                 persons.add(person);
