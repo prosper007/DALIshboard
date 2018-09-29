@@ -67,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         //layout file
         emptyView = findViewById(R.id.empty);
 
+        //progress bar while loader fetches data.
+        mProgressBar = findViewById(R.id.progress);
+
 
         //create loader and fetch data appropriately
         loadLoader();
@@ -121,8 +124,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         //set flag to false to indicate loader has been created before
         isFirstLoaderCreate = false;
 
-        //Show progress bar while loader fetches data.
-        mProgressBar = findViewById(R.id.progress);
         mProgressBar.setVisibility(View.VISIBLE);
 
         //create new loader with MainActivity and desired url as input
