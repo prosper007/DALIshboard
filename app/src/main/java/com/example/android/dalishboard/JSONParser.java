@@ -18,24 +18,15 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
+//JSONParser class for making connection from url and extracting Person data
 public class JSONParser {
     private static final String LOG_TAG = JSONParser.class.getSimpleName();
-    Context context;
 
+    //All methods are static hence object is unnecessary.
     private JSONParser(){
     }
 
-    public static ArrayList<Person> fetchPersonsData(String requestUrl, Context context){
-        URL url = createURL(requestUrl);
-        String jsonResponse = null;
-        try {
-            jsonResponse = getJsonResponse(url);
-        } catch (IOException e){
-            Log.e(LOG_TAG, "Couldn't close input stream bro", e);
-        }
-        return extractPersons(jsonResponse, context);
-    }
-
+    //Create URL object from URL string and make sure it's a valid URL
     private static URL createURL(String stringUrl){
         URL url = null;
         try{
@@ -46,6 +37,7 @@ public class JSONParser {
         return url;
     }
 
+    // read String from URL inputStream
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
@@ -60,6 +52,7 @@ public class JSONParser {
         return output.toString();
     }
 
+    //read entire JSON response from URL and store in a string
     private static String getJsonResponse(URL url) throws IOException{
         String jsonResponse = "";
 
@@ -71,6 +64,7 @@ public class JSONParser {
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
         try{
+            //connect to url and make request
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setReadTimeout(10000);
             urlConnection.setConnectTimeout(15000);
@@ -87,6 +81,7 @@ public class JSONParser {
         } catch (IOException e){
             Log.e(LOG_TAG, "IOException bro. Problem getting JSON response", e);
         } finally {
+            //disconnect url and close inputStream when done
             if (urlConnection != null) {
                 urlConnection.disconnect();
             }
@@ -97,25 +92,46 @@ public class JSONParser {
         return jsonResponse;
     }
 
+    //extract Person data from JSON response and create Person object with extracted data
     private static ArrayList<Person> extractPersons(String jsonResponse, Context context){
         if (TextUtils.isEmpty(jsonResponse)){
             return null;
         }
 
+        //store all extracted persons
         ArrayList<Person> persons = new ArrayList<>();
 
         try {
+            //root array
             JSONArray root = new JSONArray(jsonResponse);
+
             for(int i = 0; i < root.length(); i++){
+                //get a person object
                 JSONObject currentPerson = root.getJSONObject(i);
+
+                //extract name from person object
                 String name = context.getString(R.string.name) + currentPerson.getString("name");
+
+                //extract iconUrl from person object
                 String iconUrl = context.getString(R.string.url_prefix) + currentPerson.getString("iconUrl");
+
+                //extract url from person object
                 String url = currentPerson.getString("url");
+
+                //extract message from person object
                 String message = context.getString(R.string.message) + currentPerson.getString("message");
+
+                //extract latitude and longitude from array from person object
                 double latitude = currentPerson.getJSONArray("lat_long").getDouble(0);
                 double longitude = currentPerson.getJSONArray("lat_long").getDouble(1);
+
+                //extract termsOn from array from person object
                 String termsOn = context.getString(R.string.terms_on) + currentPerson.getJSONArray("terms_on").getString(0);
+
+                //extract project array from person object
                 JSONArray projectArray = currentPerson.getJSONArray("project");
+
+                // set project string depending on existence of project
                 String project;
                 if(projectArray.length() == 0 || projectArray.getString(0).equals("")){
                     project = context.getString(R.string.projects) + context.getString(R.string.none_for_now);
@@ -125,8 +141,11 @@ public class JSONParser {
 
                 }
 
+                //create Person object with extracted data
                 Person person = new Person(name, iconUrl, url, message, latitude, longitude,
                         termsOn, project);
+
+                //add person object to arraylist of Person
                 persons.add(person);
 
 
@@ -139,6 +158,18 @@ public class JSONParser {
 
         return persons;
 
+    }
+
+    //Call all methods required to extract Person data
+    public static ArrayList<Person> fetchPersonsData(String requestUrl, Context context){
+        URL url = createURL(requestUrl);
+        String jsonResponse = null;
+        try {
+            jsonResponse = getJsonResponse(url);
+        } catch (IOException e){
+            Log.e(LOG_TAG, "Couldn't close input stream bro", e);
+        }
+        return extractPersons(jsonResponse, context);
     }
 
 

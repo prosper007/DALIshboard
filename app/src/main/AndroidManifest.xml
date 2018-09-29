@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- Splash Screen that displays at launch-->
         <activity
             android:name=".SplashActivity"
             android:configChanges="orientation"
@@ -20,10 +21,10 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Main Activity that displays data -->
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation"
@@ -34,7 +35,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <!-- Sends searches to Searchable activity -->
+            <!-- It handles its own searches-->
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value="com.example.android.dalishboard.MainActivity:" />
@@ -43,6 +44,7 @@
                 android:resource="@xml/searchable" />
         </activity>
 
+        <!-- Background Service for resolving coordinates to address-->
         <service
             android:name=".FetchAddressIntentService"
             android:exported="false" />

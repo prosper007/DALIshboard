@@ -1,23 +1,12 @@
 package com.example.android.dalishboard;
 
 
-import android.location.Address;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+// Person class to hold data for each person. It implements Parcelable so it could be passed from
+// MainActivity UI thread to fetchAddressIntentService background thread
 public class Person implements Parcelable{
-
-
-    public static final Parcelable.Creator<Person> CREATOR
-            = new Parcelable.Creator() {
-        public Person createFromParcel(Parcel in) {
-            return new Person(in);
-        }
-
-        public Person[] newArray(int size) {
-            return new Person[size];
-        }
-    };
 
     private String mName;
     private String mIconUrl;
@@ -28,6 +17,7 @@ public class Person implements Parcelable{
     private String mTermsOn;
     private String mProject;
 
+    //Constructor takes in data extracted from JSON response and sets appropriate fields
     public Person(String mName, String mIconUrl, String mUrl, String mMessage,
                   double mLatitude, double mLongitude, String mTermsOn, String mProject) {
         this.mName = mName;
@@ -40,6 +30,7 @@ public class Person implements Parcelable{
         this.mProject = mProject;
     }
 
+    //getter methods
     public String getmName() {
         return mName;
     }
@@ -47,7 +38,6 @@ public class Person implements Parcelable{
     public String getmIconUrl() {
         return mIconUrl;
     }
-
 
     public String getmUrl() {
         return mUrl;
@@ -77,7 +67,8 @@ public class Person implements Parcelable{
         return mProject;
     }
 
-
+    // Only address needs to be set as it is calculated from coordinates by
+    // fetchAddressIntentService class
     public void setmAddress(String mAddress) {
         this.mAddress = mAddress;
     }
@@ -93,6 +84,19 @@ public class Person implements Parcelable{
                 '}';
     }
 
+    //Methods controlling Parcelable behaviour
+    public static final Parcelable.Creator<Person> CREATOR
+            = new Parcelable.Creator() {
+        public Person createFromParcel(Parcel in) {
+            return new Person(in);
+        }
+
+        public Person[] newArray(int size) {
+            return new Person[size];
+        }
+    };
+
+    //Constructor for creating a Person from Parcelable object
     public Person(Parcel in){
         this.mName = in.readString();
         this.mIconUrl = in.readString();
@@ -110,6 +114,7 @@ public class Person implements Parcelable{
         return 0;
     }
 
+    //Method for creating a Parcelable Person
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(this.mName);
